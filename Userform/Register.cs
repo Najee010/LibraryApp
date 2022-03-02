@@ -20,7 +20,7 @@ namespace Userform
 
         public Register()
         {
-
+            //Works for now but will work on implimenting pushing data to sql with Dao's only
             InitializeComponent();
             connectionString = "Data Source=NAJEE\\SQLEXPRESS;" + "Initial Catalog= GamesDB;Integrated Security=SSPI; Persist Security Info =false";
             cnn = new SqlConnection(connectionString);

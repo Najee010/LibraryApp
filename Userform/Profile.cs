@@ -16,21 +16,16 @@ namespace Userform
    
     public partial class Profile : Form
     {
-        String connectionString = null;
-        SqlConnection cnn;
-        //SqlCommand command;
         GameDao gDao = new GameDao();
         EntryDao EDao = new EntryDao();
         int indexHolder = 0;
         int indexHolder2 = 0;
-
         string date = DateTime.Now.ToString("M/d/yyyy");
 
         public Profile()
         {
             InitializeComponent();
-            connectionString = "Data Source=NAJEE\\SQLEXPRESS;" + "Initial Catalog= GamesDB;Integrated Security=SSPI; Persist Security Info =false";
-            cnn = new SqlConnection(connectionString);
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -98,13 +93,13 @@ namespace Userform
         // View/ Edit button for Gaming Entries
         private void View2_Click(object sender, EventArgs e)
         {
-            String Sgame = GridGames.Rows[indexHolder2].Cells[0].Value.ToString();
             List<Games> games = gDao.ReadAll(Logins.username);
+            indexHolder2 = GridGames.CurrentCell.RowIndex;
             Games selgame = games[indexHolder2];
             Game Gameform = new Game(selgame);
             Gameform.Show();
             this.Close();
-            label2.Text = Sgame;
+ 
 
 
         }
@@ -112,10 +107,12 @@ namespace Userform
         //Delete For Selected Game
         private void Delete2_Click(object sender, EventArgs e)
         {
-            String Dgame = GridGames.Rows[indexHolder2].Cells[0].Value.ToString();
+            //String Dgame = GridGames.Rows[indexHolder2].Cells[0].Value.ToString();
             List<Games> games = gDao.ReadAll(Logins.username);
+            indexHolder2 = GridGames.CurrentCell.RowIndex;
+
             Games selgame = games[indexHolder2];
-            label2.Text = gDao.DeleteEntry(selgame.Name);
+            Slogan.Text = gDao.DeleteEntry(selgame.Name);
             
         }
 
@@ -125,14 +122,20 @@ namespace Userform
             indexHolder = EntryBox.SelectedIndex;
             List<Entrys> Entries = EDao.ReadAll(Logins.username);
             Entrys CurrEntry = Entries[indexHolder];
-            label2.Text = EDao.DeleteEntry(CurrEntry.Title);
+            Slogan.Text = EDao.DeleteEntry(CurrEntry.Title);
         }
 
            
 
         private void GridGames_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           indexHolder2 = e.RowIndex;
+
+
+        }
+
+
+        private void EntryBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

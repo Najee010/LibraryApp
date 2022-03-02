@@ -17,6 +17,7 @@ namespace User.Dao
         DataTable GameTable = null;
         String connectionString = null;
         SqlConnection cnn;
+        SqlCommand command;
 
         public GameDao()
         {
@@ -32,6 +33,69 @@ namespace User.Dao
             GameAdapter.Fill(GameTable);
         }
 
+        //Method made to add a game to a specific users Library
+        public string AddGame(String Author, Games game)
+        {
+            string Message = "";
+            try
+            {
+                cnn.Open();
+                command = new SqlCommand("Insert into dbo.Game values(@Author,@Name,@Price,@Genre)", cnn);
+                command.Parameters.AddWithValue("@Author", Author);
+                command.Parameters.AddWithValue("@Name", game.Name);
+                command.Parameters.AddWithValue("@Price", game.Price);
+                command.Parameters.AddWithValue("@Genre", game.Genre);
+
+
+                int r = command.ExecuteNonQuery();
+                Message = "Entry Stored Successfully";
+                cnn.Close();
+            }
+            catch (SqlException ex)
+            {
+                Message  = "Error in SQL! " + ex.Message;
+            }
+            finally
+            {
+                if (cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
+            return Message;
+        }
+
+        //Function used to edit a users existing entry
+        public String EditGame(Games game)
+        {
+            String Message = "";
+            try
+            {
+                cnn.Open();
+                command = new SqlCommand("Update dbo.Game Set Name = @name,Price = @Price, Genre =@Genre Where Name = @currentGame", cnn);
+                command.Parameters.AddWithValue("@currentGame", game.Name);
+                command.Parameters.AddWithValue("@Name", game.Name);
+                command.Parameters.AddWithValue("@Price", game.Price);
+                command.Parameters.AddWithValue("@Genre", game.Genre);
+                int r = command.ExecuteNonQuery();
+                Message  = "Edit Stored Successfully";
+                cnn.Close();
+            }
+            catch (SqlException ex)
+            {
+                Message = "Error in SQL! " + ex.Message;
+            }
+            finally
+            {
+                if (cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
+            return Message;
+        }
+
+        //Function to retrieve all games entries made from the requesting
         public List<Games> ReadAll(string AuthorFilter = "")
         {
             List<Games> Games = new List<Games>();
@@ -47,6 +111,7 @@ namespace User.Dao
             return Games;
         }
 
+        //Function to delete a game entry
         public string DeleteEntry(string name)
         {
 

@@ -35,7 +35,7 @@
             this.Delete = new System.Windows.Forms.Button();
             this.Welcome = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Slogan = new System.Windows.Forms.Label();
             this.Logout = new System.Windows.Forms.Button();
             this.View = new System.Windows.Forms.Button();
             this.Delete2 = new System.Windows.Forms.Button();
@@ -71,6 +71,7 @@
             this.EntryBox.Name = "EntryBox";
             this.EntryBox.Size = new System.Drawing.Size(337, 100);
             this.EntryBox.TabIndex = 2;
+            this.EntryBox.SelectedIndexChanged += new System.EventHandler(this.EntryBox_SelectedIndexChanged);
             // 
             // newEntry
             // 
@@ -115,15 +116,15 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // label2
+            // Slogan
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(83, 97);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 29);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "\' \'";
+            this.Slogan.AutoSize = true;
+            this.Slogan.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Slogan.Location = new System.Drawing.Point(83, 97);
+            this.Slogan.Name = "Slogan";
+            this.Slogan.Size = new System.Drawing.Size(27, 29);
+            this.Slogan.TabIndex = 9;
+            this.Slogan.Text = "\' \'";
             // 
             // Logout
             // 
@@ -187,7 +188,7 @@
             this.Controls.Add(this.Delete2);
             this.Controls.Add(this.View2);
             this.Controls.Add(this.Logout);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Slogan);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.Welcome);
             this.Controls.Add(this.Delete);
@@ -214,7 +215,7 @@
         private System.Windows.Forms.Button Delete;
         private System.Windows.Forms.Label Welcome;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Slogan;
         private System.Windows.Forms.Button Logout;
         private System.Windows.Forms.Button View;
         private System.Windows.Forms.Button Delete2;

@@ -12,6 +12,7 @@ using User.Entities;
 
 namespace Userform
 {
+    //Works but work on using dao to push data to sql instead of form
     public partial class Entry : Form
     {
         String connectionString = "Data Source=NAJEE\\SQLEXPRESS;" + "Initial Catalog= GamesDB;Integrated Security=SSPI; Persist Security Info =false";
