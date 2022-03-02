@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
+//Setting up the connectionstring to the games database
 namespace User.Dao
 {
     public class Cfactory

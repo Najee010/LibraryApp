@@ -8,6 +8,7 @@ using User.Entities;
 
 namespace User.Dao
 {
+    //This is the Entry Data access object and it is used to to retrieve or delete Journal Entries from MySQL
 
     public class EntryDao
     {
@@ -23,14 +24,18 @@ namespace User.Dao
             connectionString = "Data Source=NAJEE\\SQLEXPRESS;" + "Initial Catalog= GamesDB;Integrated Security=SSPI; Persist Security Info =false";
             cnn = new SqlConnection(connectionString);
 
+            //Set entry adapter to retrieve all Entries
             EntryAdapter = new SqlDataAdapter("select * from Entry", Cfactory.CnnString);
             SqlCommandBuilder CommandBuilder = new SqlCommandBuilder(EntryAdapter);
-            string insertStatement = "Insert into Entry( Name, Date, Description, Title) values(@Name, @Date, @Description, @Title)";
-            EntryAdapter.InsertCommand = new SqlCommand(insertStatement);
+
+            //Filling the Entrytable with the retrieved values
+            //string insertStatement = "Insert into Entry( Name, Date, Description, Title) values(@Name, @Date, @Description, @Title)";
+            //EntryAdapter.InsertCommand = new SqlCommand(insertStatement);
             EntryTable = new DataTable();
             EntryAdapter.Fill(EntryTable);
         }
 
+        //function to convert sql data into Entry objects and store them in an organized list.
         public List<Entrys> ReadAll(string NameFilter = "")
         {
             List<Entrys> Entrys = new List<Entrys>();
@@ -47,6 +52,7 @@ namespace User.Dao
 
         }
 
+        //function to delete a journal entry
         public string DeleteEntry(string title)
         {
            

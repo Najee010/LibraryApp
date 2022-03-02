@@ -8,6 +8,7 @@ using System.Web;
 using User.Entities;
 using User.Dao;
 
+//This is the Game Data access object and it is used to to retrieve or delete Game information from MySQL
 namespace User.Dao
 {
     public class GameDao
@@ -22,10 +23,11 @@ namespace User.Dao
             connectionString = "Data Source=NAJEE\\SQLEXPRESS;" + "Initial Catalog= GamesDB;Integrated Security=SSPI; Persist Security Info =false";
             cnn = new SqlConnection(connectionString);
 
+            //fill the 
             GameAdapter = new SqlDataAdapter("select * from Game", Cfactory.CnnString);
-            SqlCommandBuilder CommandBuilder = new SqlCommandBuilder(GameAdapter);
-            string insertStatement = "Insert into Game(Author, Name, Price, Genre) values(@Author, @Name, @Price, @Genre)";
-            GameAdapter.InsertCommand = new SqlCommand(insertStatement);
+            //SqlCommandBuilder CommandBuilder = new SqlCommandBuilder(GameAdapter);
+            //string insertStatement = "Insert into Game(Author, Name, Price, Genre) values(@Author, @Name, @Price, @Genre)";
+            //GameAdapter.InsertCommand = new SqlCommand(insertStatement);
             GameTable = new DataTable();
             GameAdapter.Fill(GameTable);
         }
