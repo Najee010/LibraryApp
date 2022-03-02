@@ -5,6 +5,7 @@ using System.Web;
 
 namespace User.Entities
 {
+    //Entity used to retrieve journal entry data from SQL and repackage them back into objects for display
     public class Entrys
     {
         public string Name { get; set; }

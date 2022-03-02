@@ -5,6 +5,7 @@ using System.Web;
 
 namespace User.Entities
 {
+    //Entity used to retrieve game data from SQL and repackage them back into objects for display
     public class Games
     {
         public string Name { get; set; }

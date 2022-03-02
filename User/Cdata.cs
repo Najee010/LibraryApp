@@ -9,9 +9,10 @@ using System.Text;
 namespace Data
 
 {
-
+    //Creating Game class to send all information in one object as opposed to multiple vlaues
     public class Game
     {
+        //can be created creat an instance of and empty game and add values later
         public Game() { }
         public Game(int ID, String Name, int Price, String Genre)
         {
@@ -21,6 +22,7 @@ namespace Data
             this.Genre = Genre;
         }
 
+        //Making all setters and getters
         [DataMember]
         public int ID
         {
@@ -51,7 +53,8 @@ namespace Data
 
 
     }
-
+    //May be unused, will delete if it is.
+    /*
     [DataContract]
     public class Game2
     {
@@ -93,7 +96,8 @@ namespace Data
         }
 
     }
-
+    */
+    //Class to create and store and send all user information packed into a single object
     public class User
     {
         public User() { }
@@ -105,6 +109,7 @@ namespace Data
             this.Description = Description;
         }
 
+        //setters and getters
         public int ID
         {
             get { return ID; }

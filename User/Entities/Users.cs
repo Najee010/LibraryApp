@@ -5,6 +5,7 @@ using System.Web;
 
 namespace User.Entities
 {
+    //User entity, used to create and hold all retrieved Data on users from MySql
     public class Users
     {
         public int ID { get; set; }
