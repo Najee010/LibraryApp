@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using User.Entities;
 
-namespace User.Dao
-{
     //This is the Entry Data access object and it is used to to retrieve or delete Journal Entries from MySQL
 
     public class EntryDao
@@ -82,5 +78,5 @@ namespace User.Dao
                 
 
   
-            }
-        }
+    }
+        

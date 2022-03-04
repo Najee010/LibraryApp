@@ -3,14 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using User.Entities;
-using User.Dao;
 
 //This is the Game Data access object and it is used to to retrieve or delete Game information from MySQL
-namespace User.Dao
-{
     public class GameDao
     {
         SqlDataAdapter GameAdapter = null;
@@ -139,4 +134,3 @@ namespace User.Dao
             return error;
         }
     }
-}

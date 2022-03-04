@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Cdata.cs" />
     <Compile Include="Dao\Cfactory.cs" />
+    <Compile Include="Dao\UserDao.cs" />
     <Compile Include="Dao\EntryDao.cs" />
     <Compile Include="Dao\GameDao.cs" />
     <Compile Include="Entities\Entrys.cs" />

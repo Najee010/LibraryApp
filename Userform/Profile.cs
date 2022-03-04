@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using User.Dao;
 using User.Entities;
 
 namespace Userform
@@ -18,6 +17,8 @@ namespace Userform
     {
         GameDao gDao = new GameDao();
         EntryDao EDao = new EntryDao();
+        UserDao uDao = new UserDao();
+        Users user = new Users();
         int indexHolder = 0;
         int indexHolder2 = 0;
         string date = DateTime.Now.ToString("M/d/yyyy");
@@ -30,12 +31,17 @@ namespace Userform
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            
+           user = uDao.getUser(Logins.username);
+
             //Welcomes users using name of logged in user
-            Welcome.Text = "Welcome " + Logins.username;
+            //Welcome.Text = "Welcome " + Logins.username;
+            Welcome.Text = "Welcomne " + user.Name;
 
             //display date
             labelDate.Text = date;
+
+            //Add users slogan
+            Slogan.Text = user.Description;
 
             //Populate Listbox Journal Entries
             List<Entrys> Entries = EDao.ReadAll(Logins.username);
