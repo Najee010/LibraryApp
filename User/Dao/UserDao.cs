@@ -10,7 +10,7 @@ public class UserDao
 {
     String connectionString = null;
     SqlConnection cnn;
-    //SqlCommand command;
+    SqlCommand command;
     SqlDataAdapter userAdapter = null;
     DataTable userTable;
     Users user = new Users();
@@ -24,6 +24,39 @@ public class UserDao
         userAdapter.Fill(userTable);
     }
 
+    //Function to add a user to the the User Table
+    public String addUser(Users user)
+    {
+        String result;
+        try
+        {
+            cnn.Open();
+            command = new SqlCommand("Insert into dbo.Users values(@Name,@Password,@Description)", cnn);
+            command.Parameters.AddWithValue("@Name", user.Name);
+            command.Parameters.AddWithValue("@Password", user.Password);
+            command.Parameters.AddWithValue("@Description", user.Description);
+            int r = command.ExecuteNonQuery();
+            result = "Successfully added " + user.Name + " to system. Returning to Login Page";
+            cnn.Close();
+
+
+        }
+        catch (SqlException ex)
+        {
+            result = "Error in SQL! " + ex.Message;
+        }
+        finally
+        {
+            if (cnn.State == ConnectionState.Open)
+            {
+                cnn.Close();
+            }
+        }
+        return result;
+    }
+    
+
+    //function to retrieve a user by the string given
     public Users getUser(string UserFilter="")
     {
         DataRow[] row = userTable.Select($"Name like '%{UserFilter}%'");

@@ -15,19 +15,16 @@ namespace Userform
 {
     public partial class Logins : Form
     {
-        String connectionString = null;
-        SqlConnection cnn;
-        SqlCommand command;
+        UserDao uDao = new UserDao();
+        Users user = new Users();
+
 
         public static string username;
         Profile ProfilePage = new Profile();
 
         public Logins()
         {
-            InitializeComponent();
-            connectionString = "Data Source=NAJEE\\SQLEXPRESS;" + "Initial Catalog= GamesDB;Integrated Security=SSPI; Persist Security Info =false";
-            cnn = new SqlConnection(connectionString);
-            
+            InitializeComponent();           
         }
 
         public object Response { get; private set; }
@@ -40,44 +37,29 @@ namespace Userform
         //Login Button
         private void button1_Click(object sender, EventArgs e)
         {
-
+            //Users user = new Users(txtName.Text, txtPassword.Text, "");
             try
             {
-                Users user = new Users(txtName.Text, txtPassword.Text, "");
-                String queryString = "select * from dbo.Users where name ='" + user.Name + "';";
-                cnn.Open();
-                command = new SqlCommand(queryString, cnn);
-                SqlDataReader reader = command.ExecuteReader();
+                user = uDao.getUser(txtName.Text);
+                //Logins.username saved to load profile information
+                username = user.Name;
 
-                
-                while (reader.Read())
+                if (user.Name == txtName.Text && user.Password == txtPassword.Text)
                 {
-                    if (user.Name != reader["Name"].ToString() || user.Password != reader["Password"].ToString() ||user.Name == "" || user.Password =="" )
-                    {
-                        Message.Text = "Incorrect Username Or Password, Try again";
-                    }
-                   else if (user.Name == reader["Name"].ToString() && user.Password == reader["Password"].ToString())
-                    {
-                        //If Login successful, save Usrname to assis with form 2 processes
-                        username = user.Name;
-                        ProfilePage.Show();
-                        this.Hide();
-                    }
-  
+                    ProfilePage.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    Message.Text = "Incorrect Username or Password, Try again pls";
                 }
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                Message.Text = ("Error in SQL!" + ex.Message);
-            }
-            finally
-            {
-                if (cnn.State == ConnectionState.Open)
-                {
-                    cnn.Close();
-                }
+                Message.Text = "User does not exist, Try again";
             }
         }
+
 
         private void Register_Click(object sender, EventArgs e)
         {

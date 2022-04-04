@@ -33,8 +33,7 @@ namespace Userform
         {
            user = uDao.getUser(Logins.username);
 
-            //Welcomes users using name of logged in user
-            //Welcome.Text = "Welcome " + Logins.username;
+            //Welcomes users using name of logged in user     
             Welcome.Text = "Welcomne " + user.Name;
 
             //display date
